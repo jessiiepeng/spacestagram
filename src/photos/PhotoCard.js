@@ -50,7 +50,7 @@ export default function PhotoCard(props) {
         component="img"
         height="194"
         image={props.href}
-        alt="test"
+        alt={props.title}
       />
       <CardContent>
    

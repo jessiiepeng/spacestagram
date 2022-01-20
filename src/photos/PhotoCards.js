@@ -10,9 +10,7 @@ import PhotoCard from './PhotoCard';
 
 export default function PhotoCards(props) {
   
-
 const [photoData, setPhotoData] = useState(null);
-
 useEffect(() => {
     fetchPhoto();
 
@@ -24,10 +22,11 @@ useEffect(() => {
       const data = await res.json();
       setPhotoData(data);
     }
-  }, []);
+  }, [props.query]);
 
   if (!photoData) return <div />;
   console.log(photoData);
+
 
   function createCard(value, index) {
       if (value.data[0].media_type != "video") {
@@ -35,10 +34,13 @@ useEffect(() => {
           <PhotoCard href={value.links[0].href} 
           title={value.data[0].title}
           description={value.data[0].description}
-          date={value.data[0].date_created}/>
+          date={value.data[0].date_created}
+         />
+ 
         </Grid>);
       } 
   }
+
 
   return (
     <Grid sx={{ flexGrow: 1 }} container spacing={2} pt="50px" pl="15px" pr="15px">

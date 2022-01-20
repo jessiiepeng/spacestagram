@@ -29,8 +29,10 @@ const theme = createTheme({
 
 function App() {
   const [queryData, setQueryData] = useState('star');  
+
   const currentSearch = search => {
     setQueryData(search);
+    console.log(queryData);
   }
 
   
@@ -39,11 +41,8 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
       <Header search={currentSearch}/>
-      <PhotoCards query={queryData}/>
+      <PhotoCards query={queryData} />
       </ThemeProvider>
-      
-
-
     </div>
   );
 }

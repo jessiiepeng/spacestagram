@@ -16,6 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { PinDropSharp } from "@mui/icons-material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -48,7 +49,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -159,26 +160,22 @@ export default function Header(props) {
   const [queryData, setQueryData] = useState('');  
 
   function onSubmit(e) {
-        e.preventDafult();
-      console.log("input changed");
-      setQueryData(e.target.value);
+      console.log('button pressed');
+      console.log(queryData);
       props.search(queryData);
 
+
+  }
+  function onChange(e) {
+      setQueryData(e.target.value);
+      console.log(queryData);
   }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          
           <Typography
             variant="h6"
             noWrap
@@ -188,13 +185,10 @@ export default function Header(props) {
               Spacestagram
           </Typography>
           <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
+      
             <form               
-            onSubmit={(e) => onSubmit(e)}
+            onChange={(e) => onChange(e)}
               value={queryData}>
-
                   
             <StyledInputBase
               placeholder="Search…"
@@ -203,22 +197,29 @@ export default function Header(props) {
             />
             </form>
           </Search>
+          <IconButton
+          onClick={onSubmit}
+          color="secondary"
+          >
+              
+          <SearchIcon />
+          </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="favorite"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge badgeContent={4} color="secondary">
+              <FavoriteIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
